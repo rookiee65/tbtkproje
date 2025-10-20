@@ -1,0 +1,325 @@
+/* === Genel Ayarlar === */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* === Harita === */
+#map {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* === Panel === */
+#panelContainer {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  width: 300px;
+  background: #ffffffee;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  overflow: hidden;
+  z-index: 999;
+  backdrop-filter: blur(6px);
+}
+
+/* === Panel Sekmeleri === */
+#panelTabs {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+#panelTabs button {
+  flex: 1;
+  background: #f3f4f6;
+  border: none;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: #374151;
+  transition: background 0.2s;
+}
+
+#panelTabs button:hover {
+  background: #e5e7eb;
+}
+
+#panelTabs button.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* === Panel Başlıkları ve Butonlar === */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-weight: bold;
+}
+
+.panelIcons button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.panelIcons button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* === Arama Alanı === */
+.listSearch {
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.listSearch input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.listSearch input:focus {
+  border-color: #2563eb;
+}
+
+/* === Marker ve Yol Listesi === */
+#markerList, #pathList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#markerList li, #pathList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+#markerList li:hover, #pathList li:hover {
+  background: #eff6ff;
+}
+
+#markerList li button, #pathList li button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 6px;
+  transition: transform 0.15s;
+}
+
+#markerList li button:hover, #pathList li button:hover {
+  transform: scale(1.1);
+}
+
+/* === Marker Formu === */
+#markerForm {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  padding: 16px;
+  z-index: 1000;
+  width: 300px;
+}
+
+#markerForm.hidden {
+  display: none;
+}
+
+#markerForm h3 {
+  margin-top: 0;
+  color: #1e3a8a;
+}
+
+#markerForm input,
+#markerForm textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#markerForm textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+#markerForm label {
+  font-size: 13px;
+  display: block;
+  margin-top: 10px;
+}
+
+#markerForm input[type=file] {
+  margin-top: 4px;
+}
+
+.formButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#saveMarkerBtn, #cancelMarkerBtn {
+  flex: 1;
+  margin: 4px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+#cancelMarkerBtn {
+  background: #6b7280;
+}
+
+#saveMarkerBtn:hover {
+  background: #1d4ed8;
+}
+
+#cancelMarkerBtn:hover {
+  background: #4b5563;
+}
+
+/* === Alt Kontrol Çubuğu === */
+#controlBar {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffffee;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  z-index: 999;
+  backdrop-filter: blur(6px);
+}
+
+#controlBar .group {
+  display: flex;
+  gap: 6px;
+}
+
+#controlBar button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#controlBar button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+#controlBar button.hidden {
+  display: none;
+}
+
+/* === Arama Kutusu (Adres) === */
+#searchContainer {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+.search-box {
+  background: #ffffffee;
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(6px);
+}
+
+#addressInput {
+  border: none;
+  outline: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  flex: 1;
+}
+
+#addressBtn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#addressBtn:hover {
+  background: #1e40af;
+}
+
+/* === Scrollbar Stil === */
+#markerList::-webkit-scrollbar,
+#pathList::-webkit-scrollbar {
+  width: 6px;
+}
+#markerList::-webkit-scrollbar-thumb,
+#pathList::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 6px;
+}
+#markerList::-webkit-scrollbar-thumb:hover,
+#pathList::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* === Gizleme Sınıfı === */
+.hidden {
+  display: none;
+}
+/* === Arama Kutusu Etkileşimi Düzeltme === */
+
+.leaflet-top.leaflet-left {
+  pointer-events: none;
+}
+#searchContainer, #searchContainer * {
+  pointer-events: all;
+}

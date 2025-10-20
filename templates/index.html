@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Harita Projesi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <!-- 🗺️ Harita -->
+  <div id="map"></div>
+
+  <!-- 🔍 Adres Arama -->
+  <div id="searchContainer" class="leaflet-top leaflet-left">
+    <div class="search-box">
+      <input id="addressInput" type="text" placeholder="Adres veya konum girin...">
+      <button id="addressBtn">Ara</button>
+    </div>
+  </div>
+
+  <!-- 📋 Marker / Yol Paneli -->
+  <div id="panelContainer">
+    <div id="panelTabs">
+      <button id="markersTab" class="active">📍 Markerler</button>
+      <button id="pathsTab">🛣️ Yollar</button>
+    </div>
+
+    <!-- Marker Panel -->
+    <div id="markerPanel">
+      <div class="panelHeader">
+        <span>Marker Listesi</span>
+        <div class="panelIcons">
+          <button id="exportBtn" title="Dışa Aktar">📤</button>
+          <button id="importBtn" title="İçe Aktar">📥</button>
+          <input type="file" id="importFile" accept=".json" style="display:none;">
+        </div>
+      </div>
+      <div class="listSearch">
+        <input type="text" id="markerSearch" placeholder="Marker ara...">
+      </div>
+      <ul id="markerList"></ul>
+    </div>
+
+    <!-- Yol Panel -->
+    <div id="pathPanel" class="hidden">
+      <div class="panelHeader"><span>Yol Listesi</span></div>
+      <div class="listSearch">
+        <input type="text" id="pathSearch" placeholder="Yol ara...">
+      </div>
+      <ul id="pathList"></ul>
+    </div>
+  </div>
+
+  <!-- 📝 Marker Ekle/Düzenle Formu -->
+  <div id="markerForm" class="hidden">
+    <h3 id="formTitle">Yeni Marker</h3>
+    <input id="titleInput" placeholder="Başlık">
+    <textarea id="descInput" placeholder="Açıklama"></textarea>
+
+    <label>Fotoğraf: <span id="photoLabel">Dosya seçin</span></label>
+    <input id="photoInput" type="file" accept="image/*">
+
+    <label>Ses: <span id="audioLabel">Dosya seçin</span></label>
+    <input id="audioInput" type="file" accept="audio/*">
+
+    <div class="formButtons">
+      <button id="saveMarkerBtn">Kaydet</button>
+      <button id="cancelMarkerBtn">İptal</button>
+    </div>
+  </div>
+
+  <!-- ⚙️ Alt Kontrol Çubuğu -->
+  <div id="controlBar">
+    <div class="group">
+      <button id="addMarkerBtn" title="Yeni marker ekle">📍 Marker Ekle</button>
+      <button id="drawPathBtn" title="Yol çiz">🛣️ Yol Çiz</button>
+      <input id="pathColorPicker" type="color" value="#2e6de4" title="Yol rengi seç" class="hidden">
+      <button id="savePathBtn" class="hidden" title="Yolu kaydet">💾 Kaydet</button>
+      <button id="cancelPathBtn" class="hidden" title="Yolu iptal et">❌ İptal</button>
+    </div>
+    <div class="group">
+      <button id="deleteMarkerModeBtn" title="Marker silme modu">🗑️ Marker Sil</button>
+      <button id="deletePathModeBtn" title="Yol silme modu">🗑️ Yol Sil</button>
+      <button id="playAllBtn" title="Tüm sesleri oynat">▶️ Sesler</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
